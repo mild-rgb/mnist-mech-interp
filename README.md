@@ -1,7 +1,7 @@
 # Intro
 I intended this project as an introduction to mechanistc interpretability. I wanted to start with an extremely simple model. 
 
-I decided to investigate an MLP trained on the MNIST dataset. My research question was 'can the neural network recognise closed loops in numbers?'. The digits (0, 6, 8, 9) all contain loops in all styles (I excluded 4 because of the two styles). I investigated whether the model could recognise the closed loops in these numbers.
+I decided to investigate an MLP trained on the MNIST dataset. My research question was 'can the MLP recognise closed loops in numbers?'. The digits (0, 6, 8, 9) all contain loops in all styles (I excluded 4 because of the two styles). I investigated whether the model could recognise the closed loops in these numbers.
 I was vaguely inspired by this research paper [https://distill.pub/2021/multimodal-neurons/]
 
 This research took about 6 weeks to complete and produced several quite chaotic Jupyter notebooks. I recommend looking at the writeup notebooks if you just want the results and the others if you're curious about how I decided on my final lines of investigation
@@ -9,21 +9,21 @@ This research took about 6 weeks to complete and produced several quite chaotic 
 # Methodology of the writeup notebook
 My investigation went like this
 
-1) I took an MLP which had been pretrained on MNIST to 99% accuracy
+1) I took an MLP which had been pretrained on MNIST to recognise digits with 99% accuracy
 
-2) I put pytorch hooks on all layers and recorded all activations for the test dataset
+2) I put pytorch hooks on all layers and recorded all activations for all digits the test dataset
 
-3) I then took only the activations on the first layer for the loopy digits and averaged them. 
+3) I then took only the activations on the first layer for the loopy digits, averaged them, and then plotted them to view the digit
 
-4) I then sorted the activations for all the loopy digits and plotted them 
+TODO - insert sample graphics
 
-TODO - insert sample graphics 
+4) I then sorted the first layer neuron activations for all the loopy digits by strength and plotted them
 
-5) I then plotted only the top 256, 128, 64, 32, 16, 8, and 4 common neurons
+5) I then plotted the highest activating 256, 128, 64, 32, 16, 8, and 4 neurons that were common to all the loopy digits
 
 6) There were no common neurons between loopy digits when I plotted less than 64 neurons 
 
-7) However, it was possible that the loop detector feature could exist in the bottom neurons. I was looking for a pattern that would look like a 0 superimposed around an 8. While there was no singular neuron that showed that pattern, it would have been possible to construct a loop detector using what was there
+7) However, it was possible that the loop detector feature could exist in the lower strength neurons. I was looking for a pattern that would look like a 0 superimposed around an 8. While there was no singular neuron that showed that pattern, it would have been possible to construct a loop detector using what was there
 
 8) I then moved on to investigate other layers 
 
