@@ -15,7 +15,7 @@ My investigation went like this
 
 3) I then took only the activations on the first layer for the loopy digits, averaged them, and then plotted them to view the digit
 
-TODO - insert sample graphics
+![Average MNIST digits](images/avg_digits.png)
 
 4) I then sorted the first layer neuron activations for all the loopy digits by strength and plotted them
 
@@ -29,7 +29,10 @@ TODO - insert sample graphics
 
 9) I did this by taking the first 10 samples for each loopy digit and making minimal interventions to break the loops 
 
-TODo - insert sample graphics 
+![Digit 0 loop interventions](images/broken_loop_digit_0.png)
+![Digit 6 loop interventions](images/broken_loop_digit_6.png)
+![Digit 8 loop interventions](images/broken_loop_digit_8.png)
+![Digit 9 loop interventions](images/broken_loop_digit_9.png)
 
 10) I then applied those interventions to everything else in the test dataset. By the bayesian theorem, I would have between 26 and 0% failure rate. It was particularly difficult to make accurate interventions of 8 and 6
 
