@@ -17,11 +17,15 @@ My investigation went like this
 
 ![Average MNIST digits](images/avg_digits.png)
 
-4) I then sorted the first layer neuron activations for all the loopy digits by strength and plotted them
+4) I then sorted the first layer neuron activations for all the loopy digits by strength and found the neurons that ranked in the top-k activations for every loopy digit simultaneously, for k = 256, 128, 64, 32, 16, 8, and 4
 
-5) I then plotted the highest activating 256, 128, 64, 32, 16, 8, and 4 neurons that were common to all the loopy digits
+![k=64 common neurons](images/common_neurons_k64.png)
+*k=64: the 6 neurons ranking in the top 64 activations for all four loopy digits*
 
-6) There were no common neurons between loopy digits when I plotted less than 64 neurons 
+![k=32 common neurons](images/common_neurons_k32.png)
+*k=32: the 1 neuron ranking in the top 32 activations for all four loopy digits*
+
+6) There were no common neurons between loopy digits when I plotted less than 32 neurons 
 
 7) However, it was possible that the loop detector feature could exist in the lower strength neurons. I was looking for a pattern that would look like a 0 superimposed around an 8. While there was no singular neuron that showed that pattern, it would have been possible to construct a loop detector using what was there
 
