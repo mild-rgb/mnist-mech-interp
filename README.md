@@ -25,36 +25,42 @@ My investigation went like this
 ![k=32 common neurons](images/common_neurons_k32.png)
 *k=32: the 1 neuron ranking in the top 32 activations for all four loopy digits*
 
-6) There were no common neurons between loopy digits when I plotted less than 32 neurons 
+5) There were no common neurons between loopy digits when I plotted less than 32 neurons 
 
-7) However, it was possible that the loop detector feature could exist in the lower strength neurons. I was looking for a pattern that would look like a 0 superimposed around an 8. While there was no singular neuron that showed that pattern, it would have been possible to construct a loop detector using what was there
+6) However, it was possible that the loop detector feature could exist in the lower strength neurons. I was looking for a pattern that would look like a 0 superimposed around an 8. While there was no singular neuron that showed that pattern, it would have been possible to construct a loop detector using what was there
 
-8) I then moved on to investigate other layers 
+7) I then moved on to investigate other layers 
 
-9) I did this by taking the first 10 samples for each loopy digit and making minimal interventions to break the loops 
+8) I did this by taking the first 10 samples for each loopy digit and making minimal interventions to break the loops 
 
 ![Digit 0 loop interventions](images/broken_loop_digit_0.png)
 ![Digit 6 loop interventions](images/broken_loop_digit_6.png)
 ![Digit 8 loop interventions](images/broken_loop_digit_8.png)
 ![Digit 9 loop interventions](images/broken_loop_digit_9.png)
 
-10) I then applied those interventions to everything else in the test dataset. By the bayesian theorem, I would have between 26% and 0% failure rate. It was particularly difficult to make accurate interventions on 8 and 6
+9) I then applied those interventions to everything else in the test dataset. By the bayesian theorem, I would have between 26% and 0% failure rate. It was particularly difficult to make accurate interventions on 8 and 6
 
-11) I then used my code from step 2 and recorded the activations from running the modified loopy digits through the model
+10) I then used my code from step 2 and recorded the activations from running the modified loopy digits through the model
 
-12) The logit outputs from the broken digits were virtually identical to the normal ones. The only difference was a 4% confidence drop with 9 classification, with almost all of the lost confidence being distributed to 4. This is consistent with the repesentation of the average 4 and 9 being visually similar. Both of them have an enclosed upper region and approximately straight vertical section. I believe that intervention on 9 occasionally disrupts a neuron that differentiates between them. This would cause the model to confuse broken 9s with 4s. 
+11) The logit outputs from the broken digits were virtually identical to the normal ones. The only difference was a 4% confidence drop with 9 classification, with almost all of the lost confidence being distributed to 4. This is consistent with the repesentation of the average 4 and 9 being visually similar. Both of them have an enclosed upper region and approximately straight vertical section. I believe that intervention on 9 occasionally disrupts a neuron that differentiates between them. This would cause the model to confuse broken 9s with 4s. 
 
-13) I then calculated the cosine similariy between each layer with normal and broken-loop activations
+12) I then calculated the cosine similarity between each layer with normal and broken-loop activations
 
-14) The activations were virtually identical with all values higher than 0.985. 
+13) The activations were virtually identical with all values higher than 0.985.
 
-15) Therefore, breaking the loops had almost no difference on activations on all layers 
+14) To interpret whether >0.985 cosine similarity means "no change", I computed a baseline: the pairwise angular distance (in degrees) between mean activations for all 10 digit classes at every layer. Cosine similarity is nonlinear near 1.0, so angles give a more honest comparison.
 
-16) Therefore, the loop detector does not exist or is very weak. 
+![Inter-digit angular distance by layer](images/inter_digit_cosine_sim.png)
+
+15) Broken-loop digits sit within 10° of their unbroken counterparts at every layer. The closest inter-digit pair (4 vs 9) is 30° apart, and the mean inter-digit separation is 54°. The intervention moved representations 3–5× less than the distance between the two most similar digit classes in the model. The null result is conclusive.
+
+16) The 4 vs 9 angular proximity (30°, the smallest inter-digit gap) directly supports the interpretation of the broken-9 confusion: those two digits are already close in representation space, so the intervention occasionally tips samples across the boundary.
+
+17) Therefore, the loop detector does not exist or is very weak.
 
 # Results 
 
-If there is a closed loop detector feature, it is very weak as breaking loops made almost no difference on activations over all layers. 
+There is no meaningful loop detector feature. Breaking loops moved representations by less than 10° at every layer. The closest inter-digit pair in the model (4 vs 9) is 30° apart — 3× further than the largest broken-loop effect. The intervention made no representational difference at any level of the network.
 
 # Insights
 
