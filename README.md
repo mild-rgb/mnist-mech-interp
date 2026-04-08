@@ -38,13 +38,11 @@ My investigation went like this
 ![Digit 8 loop interventions](images/broken_loop_digit_8.png)
 ![Digit 9 loop interventions](images/broken_loop_digit_9.png)
 
-10) I then applied those interventions to everything else in the test dataset. By the bayesian theorem, I would have between 26 and 0% failure rate. It was particularly difficult to make accurate interventions of 8 and 6
+10) I then applied those interventions to everything else in the test dataset. By the bayesian theorem, I would have between 26% and 0% failure rate. It was particularly difficult to make accurate interventions on 8 and 6
 
 11) I then used my code from step 2 and recorded the activations from running the modified loopy digits through the model
 
-12) The logit outputs from the broken digits were virtually identical to the normal ones. The only difference was a 4% confidence drop with 9 classification. I believe this may have had something to do with the difficulty in getting interventions onto 9
-
-TODO - investigate where the extra probability went to
+12) The logit outputs from the broken digits were virtually identical to the normal ones. The only difference was a 4% confidence drop with 9 classification, with almost all of the lost confidence being distributed to 4. This is consistent with the repesentation of the average 4 and 9 being visually similar. Both of them have an enclosed upper region and approximately straight vertical section. I believe that intervention on 9 occasionally disrupts a neuron that differentiates between them. This would cause the model to confuse broken 9s with 4s. 
 
 13) I then calculated the cosine similariy between each layer with normal and broken-loop activations
 
@@ -52,13 +50,15 @@ TODO - investigate where the extra probability went to
 
 15) Therefore, breaking the loops had almost no difference on activations on all layers 
 
-16) Therefore, the loop detector does not exist
+16) Therefore, the loop detector does not exist or is very weak. 
 
 # Results 
 
-If there is a loop detector feature, it is very very weak. I believe it doesn't exist 
+If there is a closed loop detector feature, it is very weak as breaking loops made almost no difference on activations over all layers. 
 
-tldr; it doesn't exist
+# Insights
+
+I have quite a good idea of how the model works. I believe that it could be accurately represented by a series of IF statements about the values of neurons. In other words, I believe that there are coarse stroke detectors and a few critical neurons which focus on a few pixels that can flip a classification. I believe this because of the 4/broken 9 classification mistakes and the failure of quite small random interventions to make a significant difference to classifcation.  
 
 # How did I use AI?
 I used AI to write the plotting functions and solve syntax errors. I wrote all the interpretability code and planned experiments myself but got sanity checks from AI.
