@@ -1,4 +1,4 @@
-#Intro
+# Intro
 I intended this project as an introduction to mechanistc interpretability. I wanted to start with an extremely simple model. 
 
 I decided to investigate an MLP trained on the MNIST dataset. My research question was 'can the neural network recognise closed loops in numbers?'. The digits (0, 6, 8, 9) all contain loops in all styles (I excluded 4 because of the two styles). I investigated whether the model could recognise the closed loops in these numbers.
@@ -6,7 +6,7 @@ I was vaguely inspired by this research paper [https://distill.pub/2021/multimod
 
 This research took about 6 weeks to complete and produced several quite chaotic Jupyter notebooks. I recommend looking at the writeup notebooks if you just want the results and the others if you're curious about how I decided on my final lines of investigation
 
-#Methodology of the writeup notebook
+# Methodology of the writeup notebook
 My investigation went like this
 
 1) I took an MLP which had been pretrained on MNIST to 99% accuracy
@@ -47,13 +47,16 @@ TODO - investigate where the extra probability went to
 
 16) Therefore, the loop detector does not exist
 
-#Results 
+# Results 
 
 If there is a loop detector feature, it is very very weak. I believe it doesn't exist 
 
 tldr; it doesn't exist
 
-#Acknowledgements
+# How did I use AI?
+I used AI to write the plotting functions and solve syntax errors. I wrote all the interpretability code and planned experiments myself but got sanity checks from AI.
+
+# Acknowledgements
 I'd like to thank my friends for letting me bounce ideas off them and checking my reasoning
 
 
