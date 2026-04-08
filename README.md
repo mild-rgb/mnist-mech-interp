@@ -1,5 +1,5 @@
 # Intro
-I intended this project as an introduction to mechanistc interpretability. I wanted to start with an extremely simple model. 
+I intended this project as an introduction to mechanistc interpretability. This is a field which investigates on understanding how neural networks perform tasks. I wanted to start with an extremely simple model. 
 
 I decided to investigate an MLP trained on the MNIST dataset. My research question was 'can the MLP recognise closed loops in numbers?'. The digits (0, 6, 8, 9) all contain loops in all styles (I excluded 4 because of the two styles). I investigated whether the model could recognise the closed loops in these numbers.
 I was vaguely inspired by this research paper [https://distill.pub/2021/multimodal-neurons/]
@@ -11,9 +11,9 @@ My investigation went like this
 
 1) I took an MLP which had been pretrained on MNIST to recognise digits with 99% accuracy
 
-2) I put pytorch hooks on all layers and recorded all activations for all digits the test dataset
+2) I put pytorch hooks on all layers and recorded all activations for all digits in the test dataset
 
-3) I then took only the activations on the first layer for the loopy digits, averaged them, and then plotted them to view the digit
+3) I then plotted the pixel averages of all digits
 
 ![Average MNIST digits](images/avg_digits.png)
 
