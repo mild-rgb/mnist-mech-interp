@@ -1,7 +1,7 @@
 # Intro
 I intended this project as an introduction to mechanistc interpretability. This is a field which investigates on understanding how neural networks perform tasks. I wanted to start with an extremely simple model. 
 
-I decided to investigate an MLP trained on the MNIST dataset. My research question was 'can the MLP recognise closed loops in numbers?'. The digits (0, 6, 8, 9) all contain loops in all styles (I excluded 4 because of the two styles). I investigated whether the model could recognise the closed loops in these numbers.
+I decided to investigate an MLP trained on the MNIST dataset. My research question was 'can the MLP recognise closed loops in numbers?'. The digits (0, 6, 8, 9) all contain loops in all styles (I excluded 4 because it can be written with or without a closed loop). I investigated whether the model could recognise the closed loops in these numbers.
 I was vaguely inspired by this research paper [https://distill.pub/2021/multimodal-neurons/]
 
 This research took about 6 weeks to complete and produced several quite chaotic Jupyter notebooks. I recommend looking at the writeup notebooks if you just want the results and the others if you're curious about how I decided on my final lines of investigation
@@ -38,7 +38,7 @@ My investigation went like this
 ![Digit 8 loop interventions](images/broken_loop_digit_8.png)
 ![Digit 9 loop interventions](images/broken_loop_digit_9.png)
 
-9) I then applied those interventions to all other loopy digits in the test dataset. As I was able to successfully intervene on 10/10 random samples (the order of digits in the dataset is random and thusBy the Bayesian theorem, I will have between 26% and 0% failure rate in applying the interventions. See notebook 6 for how this number was reached. It was particularly difficult to make accurate interventions on 8 and 6
+9) I then applied those interventions to all other loopy digits in the test dataset. As I was able to successfully intervene on 10/10 random samples (the order of digits in the dataset is random. Therfore, the first 10 samples are also representative random samples). By the Bayesian theorem, I will have between 26% and 0% failure rate in applying the interventions. See notebook 6 for how this number was reached. It was particularly difficult to make accurate interventions on 8 and 6
 
 10) I then used my code from step 2 and recorded the activations from running the modified loopy digits through the model
 
